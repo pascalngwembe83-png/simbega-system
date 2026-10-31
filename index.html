@@ -1,0 +1,158 @@
+HTML
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMBEGA SCHOOL MANAGEMENT SYSTEM</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f1f5f9;
+ color:#172554;
+}
+header{
+ background:#123b70;
+ color:white;
+ text-align:center;
+ padding:28px 15px;
+}
+header h1{margin:0;font-size:30px}
+header p{margin:10px 0 0}
+.container{
+ max-width:430px;
+ margin:35px auto;
+ padding:15px;
+}
+.card{
+ background:white;
+ padding:25px;
+ border-radius:12px;
+ box-shadow:0 4px 15px #0001;
+}
+.tabs{
+ display:flex;
+ gap:8px;
+ margin-bottom:22px;
+}
+.tabs button{
+ flex:1;
+ padding:12px 5px;
+ border:0;
+ border-radius:7px;
+ background:#e2e8f0;
+ cursor:pointer;
+ font-weight:bold;
+}
+.tabs button.active{
+ background:#123b70;
+ color:white;
+}
+h2{text-align:center;font-size:21px}
+label{display:block;margin:15px 0 7px}
+input{
+ width:100%;
+ padding:13px;
+ border:1px solid #cbd5e1;
+ border-radius:7px;
+ font-size:16px;
+}
+.login{
+ width:100%;
+ padding:14px;
+ margin-top:22px;
+ background:#123b70;
+ color:white;
+ border:0;
+ border-radius:7px;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+}
+.hidden{display:none}
+footer{
+ text-align:center;
+ color:#64748b;
+ font-size:13px;
+ margin:25px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>SIMBEGA</h1>
+<p>MFUMO WA USIMAMIZI WA SHULE</p>
+<p>Matokeo • Walimu • Wanafunzi • Wazazi</p>
+</header>
+
+<div class="container">
+<div class="card">
+
+<div class="tabs">
+<button id="adminTab" class="active"
+onclick="showLogin('admin')">
+Mkuu wa Shule
+</button>
+
+<button id="parentTab"
+onclick="showLogin('parent')">
+Mzazi
+</button>
+</div>
+
+<div id="admin">
+<h2>Karibu Mkuu wa Shule</h2>
+<p style="text-align:center">
+Ingia kusimamia shughuli za shule.
+</p>
+
+<label>Jina la mtumiaji</label>
+<input type="text" placeholder="Username">
+
+<label>Nenosiri</label>
+<input type="password" placeholder="Password">
+
+<button class="login" onclick="alert('Mfumo wa kuingia utaunganishwa katika hatua inayofuata.')">
+INGIA
+</button>
+</div>
+
+<div id="parent" class="hidden">
+<h2>Karibu Mzazi</h2>
+<p style="text-align:center">
+Ingia kuona taarifa na matokeo ya mwanafunzi.
+</p>
+
+<label>Namba ya Admission</label>
+<input type="text" placeholder="Ingiza admission number">
+
+<label>Nenosiri</label>
+<input type="password" placeholder="Nenosiri">
+
+<button class="login" onclick="alert('Mfumo wa kuingia kwa mzazi utaunganishwa katika hatua inayofuata.')">
+INGIA
+</button>
+</div>
+
+</div>
+</div>
+
+<footer>
+SIMBEGA SCHOOL MANAGEMENT SYSTEM<br>
+© 2026 Haki zote zimehifadhiwa.
+</footer>
+
+<script>
+function showLogin(type){
+ document.getElementById('admin').classList.toggle('hidden',type!=='admin');
+ document.getElementById('parent').classList.toggle('hidden',type!=='parent');
+ document.getElementById('adminTab').classList.toggle('active',type==='admin');
+ document.getElementById('parentTab').classList.toggle('active',type==='parent');
+}
+</script>
+
+</body>
+</html>
