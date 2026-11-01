@@ -1,5 +1,3 @@
-JavaScript
-
 const encoder = new TextEncoder();
 
 function toBase64Url(bytes) {
