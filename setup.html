@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usajili wa Mkuu wa Shule - SIMBEGA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+    }
+    input, button {
+      width: 100%;
+      padding: 13px;
+      margin: 9px 0;
+      box-sizing: border-box;
+    }
+    button {
+      background: #075985;
+      color: white;
+      border: 0;
+      border-radius: 6px;
+    }
+    #message { margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>SIMBEGA</h2>
+    <h3>Usajili wa Mkuu wa Shule</h3>
+
+    <form id="setupForm">
+      <input id="setupKey" type="password"
+        placeholder="Setup Key ya Cloudflare" required>
+
+      <input id="username" type="text"
+        placeholder="Jina la mtumiaji" required>
+
+      <input id="password" type="password"
+        placeholder="Nywila (angalau herufi 12)" required minlength="12">
+
+      <input id="confirmPassword" type="password"
+        placeholder="Rudia nywila" required minlength="12">
+
+      <button type="submit">Tengeneza Akaunti</button>
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    document.getElementById("setupForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const setupKey = document.getElementById("setupKey").value;
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const message = document.getElementById("message");
+
+      if (password !== confirmPassword) {
+        message.textContent = "Nywila hazifanani.";
+        return;
+      }
+
+      message.textContent = "Inatengeneza akaunti...";
+
+      try {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "setup_admin",
+            setupKey,
+            username,
+            password
+          })
+        });
+
+        const data = await response.json();
+        message.textContent = data.message;
+
+        if (data.success) {
+          document.getElementById("setupForm").reset();
+        }
+      } catch (error) {
+        message.textContent = "Imeshindikana kuwasiliana na seva.";
+      }
+    });
+  </script>
+</body>
+</html>
